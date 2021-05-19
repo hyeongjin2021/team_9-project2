@@ -3,6 +3,8 @@ import time
 import selenium
 from selenium import webdriver
 import matplotlib.pyplot as plt
+import numpy as np
+plt.rc('font', family='Malgun Gothic')
 a=int(input('시즌  1819 ,1920 ,2021 중 하나:'))
 print('==========================')
 
@@ -34,6 +36,7 @@ if a==2021:
     lose = []
     score = []
     assist = []
+    team = []
 
     print('기록: 팀   경기수   승률   승   패   승차   득점   AS   리바운드   스틸   블록   3점슛   자유투   자유투성공')
 
@@ -43,8 +46,16 @@ if a==2021:
         lose.append(info[4])
         score.append(info[6])
         assist.append(info[7])
+        team.append(info[0])
 
     print('\n', '승:', win, '\n', '패:', lose, '\n', '득점:', score, '\n', '도움:', assist, '\n')
     time.sleep(3)
     driver.close()
+
+    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    plt.yticks(x, team)
+    plt.barh(x, assist, label='도움', color='y')
+    plt.legend()
+    plt.show()
+
 
