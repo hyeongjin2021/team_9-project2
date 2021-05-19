@@ -58,4 +58,52 @@ if a==2021:
     plt.legend()
     plt.show()
 
+#힉생2
+if a==1920:
+    driver.find_element_by_class_name('btn_move_date.prev').click()
+
+    basket = driver.find_elements_by_tag_name('tr')
+    rerecord = []
+    print('----------------------------------19-20팀순위---')
+    for i in range(11):
+        rerecord1 = []
+        basket_team = basket[i].find_elements_by_tag_name('span')
+        basket_team = basket_team[0].text
+        print(basket_team)
+        record = basket[i].find_elements_by_tag_name('td')
+        for re in record:
+            rerecord1.append(re.text)
+        rerecord.append(rerecord1)
+    del rerecord[0]
+
+    print('---------------------------19-20기록------')
+
+    # 기록
+    win = []
+    lose = []
+    score = []
+    assist = []
+    team = []
+
+    print('기록: 팀   경기수   승률   승   패   승차   득점   AS   리바운드   스틸   블록   3점슛   자유투   자유투성공')
+
+    for info in rerecord:
+        print(info)
+        win.append(float(info[3]))
+        lose.append(float(info[4]))
+        score.append(float(info[6]))
+        assist.append(float(info[7]))
+        team.append(info[0])
+
+    print('\n','팀:',team,'\n', '승:', win, '\n', '패:', lose, '\n', '득점:', score, '\n', '도움:', assist, '\n')
+    time.sleep(3)
+    driver.close()
+
+    #학생2 그래프
+    x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    plt.title('1920년 팀별 승')
+    plt.yticks(x, team)
+    plt.barh(x, win, color='r')
+    plt.xlabel('승', fontsize=15)
+    plt.show()
 
